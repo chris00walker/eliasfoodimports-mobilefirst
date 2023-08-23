@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elias Food Imports</title>
+    <meta name="description" content="Elias Food Imports - Your one-stop shop for all
+    Middle Eastern food products.">
+    <meta name="author" content="Chris Walker">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Montserrat:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <header id="header">
+            <a href="index.html"><img src="img/efi-logo.jpg" class="logo" alt="Elias Food Imports Logo"></a>
+            <div id="search-container">
+                <i class="fas fa-search" id="search-icon"></i>
+                <input type="text" id="search-input" placeholder="search" />
+                <i class="fas fa-times" id="close-icon"></i>
+            </div>
+            <nav>
+                <ul id="navbar-tablet">
+                    <li><a class="active" href="shop.html">SHOP</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <nav id="navbar">
+            <a href="index.html" id="home-link">
+                <i class="fas fa-home navbar-icon"></i>
+                <span class="navbar-label">home</span>
+            </a>
+            <div id="shop-section">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart navbar-icon"></i>
+                    <span class="navbar-label">shop</span>
+                </a>
+            </div>
+            <a href="https://wa.me/11234567890" id="contact-link" target="_blank">
+                <i class="fab fa-whatsapp navbar-icon"></i>
+                <span class="navbar-label">chat</span>
+            </a>
+            <div id="menu-section">
+                <button id="menu-button">
+                    <i class="fas fa-bars navbar-icon"></i>
+                    <span class="navbar-label">menu</span>
+                </button>
+            </div>
+        </nav>
+        <!-- Start of Slide-In Menu -->
+        <div id="slide-in-menu">
+            <div class="menu-item">
+                <i class="fas fa-info"></i>
+                <a href="about.html">about</a>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-blog"></i>
+                <a href="blog.html">blog</a>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-envelope"></i>
+                <a href="contact.html">contact</a>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-shopping-cart"></i>
+                <a href="cart.html">view cart</a>
+            </div>
+        </div>
+        <!-- End of Slide-In Menu -->
+
+        <main>
+            <section id="hero">
+                <div class="hero-content">
+                    <h1>WELCOME TO EFI</h1>
+                    <h2>One-Stop Shop For All Your Middle-Eastern Foods</h2>
+                    <button class="button" aria-label="Shop Now">Shop Now</button>
+                </div>
+            </section>
+            <section id="feature-benefits">
+                <div class="feature-item">
+                    <img src="img/features/f1.png" alt="Free Shipping">
+                    <h4 class="feature-description">Free Shipping</h4>
+                </div>
+                <div class="feature-item">
+                    <img src="img/features/f2.png" alt="Order Online">
+                    <h4 class="feature-description">Order Online</h4>
+                </div>
+                <div class="feature-item">
+                    <img src="img/features/f3.png" alt="Save Money">
+                    <h4 class="feature-description">Save Money</h4>
+                </div>
+                <div class="feature-item">
+                    <img src="img/features/f4.png" alt="Promotions">
+                    <h4 class="feature-description">Promotions</h4>
+                </div>
+                <div class="feature-item">
+                    <img src="img/features/f5.png" alt="Order Tracking">
+                    <h4 class="feature-description">Order Tracking</h4>
+                </div>
+                <div class="feature-item">
+                    <img src="img/features/f6.png" alt="Online Support">
+                    <h4 class="feature-description">Online Support</h4>
+                </div>
+            </section>
+            <section id="featured-products" class="product">
+                <h2>Featured Products</h2>
+                <div class="pro-container" role="list"></div>
+            </section>
+            <section id="new-arrivals" class="product">
+                <h2>New Arrivals</h2>
+                <div class="pro-container" role="list"></div>
+            </section>
+            <section id="newsletter">
+                <h2>Stay updated with our latest products and offers!</h2>
+                <form id="newsletterForm">
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="Enter your email" aria-label="Enter your email"
+                            required>
+                        <button type="submit">Sign up now!</button>
+                    </div>
+                    <p id="error-message" style="color: red;"></p> <!-- Placeholder for error messages -->
+                </form>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-grid">
+                <div class="col">
+                    <h4>Contact</h4>
+                    <address>
+                        <div class="contact-icon-text map-link">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://www.google.com/maps?q=Elias+Import,Worthing,Ch.Ch.,BB" target="_blank"
+                                rel="noopener noreferrer" class="map-link" role="link"
+                                aria-label="Our Location On Google Maps">
+                                </i> Our Location
+                            </a>
+                        </div>
+                        <div class="contact-icon-text phone-icon">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+12468262782" class="phone-icon" role="link"
+                                aria-label="Call Us at +1 (246) 826-2782">
+                                Call Us
+                            </a>
+                        </div>
+                        <div class="contact-icon-text hours">
+                            <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Clock Circle -->
+                                <circle cx="100" cy="100" r="96" stroke="black" stroke-width="2" fill="white" />
+
+                                <!-- Hour Indicators -->
+                                <g id="hour-indicators"></g>
+
+                                <!-- Clock Center -->
+                                <circle cx="100" cy="100" r="4" fill="black" />
+
+                                <!-- Shading Arc -->
+                                <path id="shading-arc" fill="green" d="" />
+                            </svg>
+
+                            <span>10:00AM - 6:00PM</span>
+                        </div>
+
+                        <div class="contact-icon-text calendar">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Mon - Sat</span>
+                        </div>
+                    </address>
+                </div>
+
+                <div class="col follow">
+                    <h4>Follow Us</h4>
+                    <div class="icon">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+                <div class="col">
+                    <h4>About</h4>
+                    <nav>
+                        <a href="#">About us</a>
+                        <a href="#">Delivery Information</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Contact Us</a>
+                    </nav>
+                </div>
+                <div class="col">
+                    <h4>My Account</h4>
+                    <nav>
+                        <a href="#">Sign In</a>
+                        <a href="#">View Cart</a>
+                        <a href="#">My Wishlist</a>
+                        <a href="#">Track My Order</a>
+                        <a href="#">Get Support</a>
+                    </nav>
+                </div>
+            </div>
+            <!-- <div class="col install">
+                    <h4>Install App</h4>
+                    <p>From App Store or Google Play</p>
+                    <div class="row">
+                        <img src="img/pay/app-store-icon.jpg" alt="App Store Icon">
+                        <img src="img/pay/play-store-icon.jpg" alt="Play Store Icon">
+                    </div>
+                    <p>Secured Payment Gateways</p>
+                    <img src="img/pay/popular-online-pay-logo.jpg" alt="Popular Online Payment Logo">
+                </div> -->
+            <div class="copyright">
+                <span>&#169; 2023, Elias Food Imports</span>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
