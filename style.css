@@ -420,6 +420,41 @@ p {
     border: 0.0625rem solid var(--secondary-color);
 }
 
+/* === Single Product Page === */
+
+.single-product {
+    padding: 1.25rem;
+    border: 0.0625rem solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.single-product img {
+    max-width: 12.5rem;
+    margin-right: 1.25rem;
+}
+
+.single-product h2 {
+    font-size: 1.5rem;
+    margin: 0.625rem 0;
+}
+
+.single-product .product-brand,
+.single-product .star,
+.single-product span {
+    margin: 0.3125rem 0;
+}
+
+.single-product button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.625rem 1.25rem;
+    border: none;
+    cursor: pointer;
+}
+
 /* === Newsletter Section === */
 
 #newsletter {

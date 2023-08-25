@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page - Elias Food Imports</title>
+    <title>Product Details - Elias Food Imports</title>
     <meta name="description" content="Elias Food Imports - Your one-stop shop for all
     Middle Eastern food products.">
     <meta name="author" content="Chris Walker">
@@ -30,7 +30,7 @@
             </div>
             <nav>
                 <ul id="navbar-tablet">
-                    <li><a class="active" href="shop.html">SHOP</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
                     <li><a href="blog.html">BLOG</a></li>
                     <li><a href="about.html">ABOUT</a></li>
                     <li><a href="contact.html">CONTACT</a></li>
@@ -82,100 +82,60 @@
         <!-- End of Slide-In Menu -->
 
         <main>
+            <section id="product-container" class="product">
 
+            </section>
         </main>
         <footer>
-            <div class="footer-grid">
-                <div class="col">
-                    <h4>Contact</h4>
-                    <address>
-                        <div class="contact-icon-text map-link">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <a href="https://www.google.com/maps?q=Elias+Import,Worthing,Ch.Ch.,BB" target="_blank"
-                                rel="noopener noreferrer" class="map-link" role="link"
-                                aria-label="Our Location On Google Maps">
-                                </i> Our Location
-                            </a>
-                        </div>
-                        <div class="contact-icon-text phone-icon">
-                            <i class="fas fa-phone-alt"></i>
-                            <a href="tel:+12468262782" class="phone-icon" role="link"
-                                aria-label="Call Us at +1 (246) 826-2782">
-                                Call Us
-                            </a>
-                        </div>
-                        <div class="contact-icon-text hours">
-                            <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Clock Circle -->
-                                <circle cx="100" cy="100" r="96" stroke="black" stroke-width="2" fill="white" />
-
-                                <!-- Hour Indicators -->
-                                <g id="hour-indicators"></g>
-
-                                <!-- Clock Center -->
-                                <circle cx="100" cy="100" r="4" fill="black" />
-
-                                <!-- Shading Arc -->
-                                <path id="shading-arc" fill="green" d="" />
-                            </svg>
-
-                            <span>10:00AM - 6:00PM</span>
-                        </div>
-
-                        <div class="contact-icon-text calendar">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Mon - Sat</span>
-                        </div>
-                    </address>
-                </div>
-
-                <div class="col follow">
-                    <h4>Follow Us</h4>
-                    <div class="icon">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-pinterest-p"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-                <div class="col">
-                    <h4>About</h4>
-                    <nav>
-                        <a href="#">About us</a>
-                        <a href="#">Delivery Information</a>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms & Conditions</a>
-                        <a href="#">Contact Us</a>
-                    </nav>
-                </div>
-                <div class="col">
-                    <h4>My Account</h4>
-                    <nav>
-                        <a href="#">Sign In</a>
-                        <a href="#">View Cart</a>
-                        <a href="#">My Wishlist</a>
-                        <a href="#">Track My Order</a>
-                        <a href="#">Get Support</a>
-                    </nav>
-                </div>
-            </div>
-            <!-- <div class="col install">
-                    <h4>Install App</h4>
-                    <p>From App Store or Google Play</p>
-                    <div class="row">
-                        <img src="img/pay/app-store-icon.jpg" alt="App Store Icon">
-                        <img src="img/pay/play-store-icon.jpg" alt="Play Store Icon">
-                    </div>
-                    <p>Secured Payment Gateways</p>
-                    <img src="img/pay/popular-online-pay-logo.jpg" alt="Popular Online Payment Logo">
-                </div> -->
             <div class="copyright">
                 <span>&#169; 2023, Elias Food Imports</span>
             </div>
         </footer>
     </div>
-    <script src="script.js"></script>
+    <script src="common.js"></script>
+    <script src="single-product.js" type="module"></script>
 </body>
 
 </html>
+
+
+<!-- <div class="single-pro-details">
+    <h6>Pickled Wild Cucumbers</h6>
+    <h4>Cucumber</h4>
+    <h2>$78</h2>
+    <select>
+        <option>Select Size</option>
+        <option>40 CL.</option>
+        <option>60 CL.</option>
+        <option>80 CL.</option>
+        <option>1 L</option>
+    </select>
+    <input type="number" value="1">
+    <button class="normal">Add To Cart</button>
+    <h4>Product Details</h4>
+    <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex animi non dolore reprehenderit
+        autem
+        hic veniam accusamus praesentium vel, nesciunt repellendus eveniet itaque ratione! Voluptatem
+        voluptas quidem labore fugiat ad.
+        Voluptates rerum perferendis neque vero nemo quibusdam natus expedita tempora blanditiis.
+        Aliquam
+        alias saepe quam numquam unde sed, a laboriosam, ipsa quibusdam sit, eius impedit quae. Minima
+        qui
+        soluta sit!</span>
+</div>
+<img src="img/products/f1.jpg" width="100%" id="MainImg" alt="">
+
+<div class="small-img-group">
+    <div class="small-img-col">
+        <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
+    </div>
+    <div class="small-img-col">
+        <img src="img/products/f2.jpg" width="100%" class="small-img" alt="">
+    </div>
+    <div class="small-img-col">
+        <img src="img/products/f3.jpg" width="100%" class="small-img" alt="">
+    </div>
+    <div class="small-img-col">
+        <img src="img/products/f4.jpg" width="100%" class="small-img" alt="">
+    </div>
+</div> -->
