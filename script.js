@@ -19,7 +19,7 @@ try {
                             </div>
                             <div class="product-info">
                                 <span class="product-price">$${product.price}</span>
-                                <button class="add-to-cart button" data-product='${JSON.stringify(product)}'>Add to Cart</button>
+                                <button class="add-to-cart button" data-product="${encodeURIComponent(JSON.stringify(product))}">Add to Cart</button>
                                 <span class="cart"><i class="fal fa-shopping-cart"></i></span>
                             </div>
                         </div>
@@ -70,7 +70,7 @@ try {
     document.body.addEventListener("click", function (event) {
         try {
             if (event.target.matches('.add-to-cart')) {
-                const productJSON = event.target.getAttribute('data-product');
+                const productJSON = decodeURIComponent(event.target.getAttribute('data-product'));
                 const product = JSON.parse(productJSON);
                 addToCart(product);
             }
