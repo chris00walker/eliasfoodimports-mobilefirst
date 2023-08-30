@@ -1,14 +1,15 @@
 import { featuredProductsData, newArrivalsData } from './data.js';
 import { addToCart } from './cart.js';
+import { updateCartIconUtility } from './cartUtility.js';
 
 try {
     document.addEventListener("DOMContentLoaded", function () {
         try {
             // Function to generate HTML for a product
-            function createProductHTML(product, index) {
+            function createProductHTML(product, index, arrayType) {
                 return `
                     <article class="product-card">
-                        <a href="single-product.html?index=${index}">
+                        <a href="single-product.html?type=${arrayType}&index=${index}">
                             <img src="${product.img}" alt="${product.alt}" class="product-image" data-index="${index}">
                         </a>
                         <div class="description">
@@ -38,14 +39,14 @@ try {
             // Generate and append product HTML for section 1
             let featuredProductsHTML = '';
             featuredProductsData.forEach((product, index) => {
-                featuredProductsHTML += createProductHTML(product, index);
+                featuredProductsHTML += createProductHTML(product, index, 'featured');
             });
             proContainer1.innerHTML = featuredProductsHTML;
 
             // Generate and append product HTML for new-arrivals section
             let newArrivalsHTML = '';
             newArrivalsData.forEach((product, index) => {
-                newArrivalsHTML += createProductHTML(product, index);
+                newArrivalsHTML += createProductHTML(product, index, 'newArrivals');
             });
             proContainer2.innerHTML = newArrivalsHTML;
 
@@ -58,22 +59,21 @@ try {
                 cart = [];
             }
 
-            const cartCount = cart.length;
-            document.querySelectorAll('.cart').forEach(cartIcon => {
-                cartIcon.innerHTML = `<i class="fal fa-shopping-cart"></i> ${cartCount}`;
-            });
-        } catch (e) {
-            console.error("An error occurred in DOMContentLoaded:", e);
-        }
-    });
+            updateCartIconUtility(cart);
 
-    document.body.addEventListener("click", function (event) {
-        try {
-            if (event.target.matches('.add-to-cart')) {
-                const productJSON = decodeURIComponent(event.target.getAttribute('data-product'));
-                const product = JSON.parse(productJSON);
-                addToCart(product);
-            }
+            // New code for handling "Add to Cart" clicks
+            document.body.addEventListener("click", function (event) {
+                try {
+                    if (event.target.matches('.add-to-cart')) {
+                        const productJSON = decodeURIComponent(event.target.getAttribute('data-product'));
+                        const product = JSON.parse(productJSON);
+                        addToCart(product);
+                    }
+                } catch (e) {
+                    console.error("An error occurred during click event:", e);
+                }
+            });
+
         } catch (e) {
             console.error("An error occurred during click event:", e);
         }
@@ -81,7 +81,3 @@ try {
 } catch (e) {
     console.error("An error occurred in the script:", e);
 }
-
-
-
-

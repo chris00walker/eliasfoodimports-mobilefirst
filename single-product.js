@@ -1,7 +1,10 @@
 import { featuredProductsData, newArrivalsData } from './data.js';
 import { addToCart } from './cart.js';
+import { updateCartIconUtility } from './cartUtility.js';
 
-const productsData = [...featuredProductsData, ...newArrivalsData];
+// Keep the data arrays separate
+const featuredProducts = featuredProductsData;
+const newArrivals = newArrivalsData;
 
 document.addEventListener("DOMContentLoaded", function () {
     try {
@@ -19,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="product-info">
                 <span class="product-price">$${product.price}</span>
-                <button class="add-to-cart button" data-product='${JSON.stringify(product)}'>Add to Cart</button>
+                <button class="add-to-cart button" data-product="${encodeURIComponent(JSON.stringify(product))}">Add to Cart</button>
                 <span class="cart"><i class="fal fa-shopping-cart"></i></span>
             </div>
         </div>
@@ -28,24 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function displaySingleProduct() {
-            const index = getProductIdFromURL();
-            console.log("Product Index from URL: ", index);  // Debug 2
+            const { index, type } = getProductIdFromURL();  // Updated
+            console.log("Product Index from URL: ", index, " Type: ", type);
 
-            if (index === null || index >= productsData.length) {
+            if (index === null) {
                 console.error("Invalid product index.");
                 return;
             }
 
-            const product = getProductById(index);
-            console.log("Product Data: ", product);  // Debug 3
+            const product = getProductById(index, type);  // Updated
+            console.log("Product Data: ", product);
 
             const productContainer = document.getElementById('product-container');
-
-            if (!productContainer) {
-                console.error("Product container not found.");
-                return;
-            }
-
             const html = generateSingleProductHTML(product);
             productContainer.innerHTML = html;
         }
@@ -53,28 +50,28 @@ document.addEventListener("DOMContentLoaded", function () {
         function getProductIdFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             const index = parseInt(urlParams.get('index'), 10);
-            return isNaN(index) ? null : index;
+            const type = urlParams.get('type');  // New line to get 'type'
+            return { index: isNaN(index) ? null : index, type: type || null };  // Updated to return an object
         }
 
-        function getProductById(index) {
+        function getProductById(index, type) {
+            // Choose the right array based on 'type'
+            const productsData = type === 'featured' ? featuredProducts : newArrivals;
             return productsData[index];
         }
 
         displaySingleProduct();
 
         // Load cart size from local storage and update the icon
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartCount = cart.length;
-        const cartIcons = document.querySelectorAll('.cart');
-
-        if (!cartIcons.length) {
-            console.error("Cart icons not found.");
-            return;
+        let cart;
+        try {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+            console.error("Error parsing cart from local storage:", e);
+            cart = [];
         }
 
-        cartIcons.forEach(cartIcon => {
-            cartIcon.innerHTML = `<i class="fal fa-shopping-cart"></i> ${cartCount}`;
-        });
+        updateCartIconUtility(cart);
     } catch (err) {
         console.error("An error occurred: ", err);
     }
@@ -83,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.body.addEventListener("click", function (event) {
     if (event.target.matches('.add-to-cart')) {
         try {
-            const productToAdd = JSON.parse(event.target.getAttribute('data-product'));
+            const productToAdd = JSON.parse(decodeURIComponent(event.target.getAttribute('data-product')));
             if (!productToAdd) {
                 console.error("Invalid product data.");
                 return;

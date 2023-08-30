@@ -415,9 +415,14 @@ p {
     text-align: center;
     border-radius: 3.125rem;
     background-color: var(--secondary-color);
+    cursor: pointer;
     font-weight: 500;
     color: var(--tertiary-color);
     border: 0.0625rem solid var(--secondary-color);
+}
+
+.product-card .cart:active {
+    background-color: green;
 }
 
 /* === Single Product Page === */

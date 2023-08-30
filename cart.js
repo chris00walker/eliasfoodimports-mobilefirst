@@ -1,3 +1,5 @@
+import { updateCartIconUtility } from './cartUtility.js';  // Import the utility function
+
 // Initialize an empty cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -11,22 +13,9 @@ function addToCart(productToAdd) {
     if (isValidProduct(productToAdd)) {
         cart.push(productToAdd);
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartIcon();
+        updateCartIconUtility(cart);  // Use the utility function here
     } else {
         console.error("Invalid product object. Cannot add to cart.");
-    }
-}
-
-// Function to update cart icon
-function updateCartIcon() {
-    const cartCount = cart.length;
-    const cartIcons = document.querySelectorAll('.cart');
-    if (cartIcons) {
-        cartIcons.forEach(cartIcon => {
-            cartIcon.innerHTML = `<i class="fal fa-shopping-cart"></i> ${cartCount}`;
-        });
-    } else {
-        console.error("Cart icon elements not found.");
     }
 }
 
@@ -35,7 +24,7 @@ function removeFromCart(cartIndex) {
     if (cartIndex >= 0 && cartIndex < cart.length) {
         cart.splice(cartIndex, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartIcon();
+        updateCartIconUtility(cart);  // Use the utility function here
         renderCart();
     } else {
         console.error("Invalid cart index. Cannot remove item.");
@@ -163,7 +152,7 @@ function renderCart() {
 
         // Update local storage and cart icon
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartIcon();
+        updateCartIconUtility(cart);
     } else {
         console.error("Main element not found.");
     }
@@ -171,7 +160,7 @@ function renderCart() {
 
 // Initialize the cart when the document is ready
 document.addEventListener("DOMContentLoaded", function () {
-    updateCartIcon();
+    updateCartIconUtility(cart);  // Use the utility function here
     // Only render the cart if on the cart.html page
     const mainElement = document.querySelector('main[data-page="cart"]');
     if (mainElement) {

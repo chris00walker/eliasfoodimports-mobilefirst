@@ -69,8 +69,8 @@ export const featuredProductsData = [
 export const newArrivalsData = [
     {
         img: "img/products/n1.jpg",
-        alt: "Long Bread Sticks from Moulin D'or",
-        brand: "MOULIN D'OR",
+        alt: "Long Bread Sticks from Moulin D\'or",
+        brand: "MOULIN D\'OR",
         name: "Long Bread Sticks",
         stars: 5,
         price: 10
