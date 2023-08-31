@@ -70,6 +70,11 @@ function renderCart() {
                 totalPrice += product.price;
                 const row = document.createElement('tr');
 
+                // New: Initialize quantity if not present
+                if (!('quantity' in product)) {
+                    product.quantity = 1;
+                }
+
                 ['button', 'img', 'name', 'price', 'quantity', 'subtotal'].forEach(cellType => {
                     const cell = document.createElement('td');
                     if (cellType === 'button') {
@@ -90,9 +95,37 @@ function renderCart() {
                     } else if (cellType === 'price') {
                         cell.innerText = `$${product.price}`;
                     } else if (cellType === 'quantity') {
-                        cell.innerText = '1';
+                        const quantityInput = document.createElement('input');
+                        quantityInput.type = 'number';
+                        quantityInput.min = 1;
+                        quantityInput.value = product.quantity;
+                        quantityInput.addEventListener('change', function () {
+                            const newQuantity = parseInt(this.value);
+                            if (isNaN(newQuantity) || newQuantity < 1) {
+                                return;  // Invalid entry
+                            }
+                            // Update the product quantity
+                            product.quantity = newQuantity;
+                            // Update local storage
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            // Update the subtotal for this product
+                            const subtotalCell = row.querySelector('.subtotal');
+                            if (subtotalCell) {
+                                subtotalCell.innerText = `$${product.price * newQuantity}`;
+                            }
+                            // Update the total price
+                            const totalCell = document.querySelector('#cart-total');
+                            if (totalCell) {
+                                const newTotal = cart.reduce((acc, product) => acc + product.price * product.quantity, 0);
+                                totalCell.innerHTML = `<strong>$${newTotal.toFixed(2)}</strong>`;
+                            }
+                            // Update cart icon
+                            updateCartIconUtility(cart);
+                        });
+                        cell.appendChild(quantityInput);
                     } else if (cellType === 'subtotal') {
-                        cell.innerText = `$${product.price}`;
+                        cell.className = 'subtotal';
+                        cell.innerText = `$${product.price * product.quantity}`;
                     }
                     row.appendChild(cell);
                 });
