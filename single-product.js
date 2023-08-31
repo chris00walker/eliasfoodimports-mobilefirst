@@ -81,6 +81,7 @@ document.body.addEventListener("click", function (event) {
     if (event.target.matches('.add-to-cart')) {
         try {
             const productToAdd = JSON.parse(decodeURIComponent(event.target.getAttribute('data-product')));
+
             if (!productToAdd) {
                 console.error("Invalid product data.");
                 return;

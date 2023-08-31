@@ -74,14 +74,17 @@ function renderCart() {
                     const cell = document.createElement('td');
                     if (cellType === 'button') {
                         const btn = document.createElement('button');
-                        btn.innerText = 'Remove';
+                        btn.innerHTML = '<i class="fas fa-times-circle"></i>';
                         cell.appendChild(btn);
                     } else if (cellType === 'img') {
                         const img = document.createElement('img');
                         img.src = product.img;
                         img.alt = product.alt;
                         img.width = 50;
-                        cell.appendChild(img);
+                        const anchor = document.createElement('a');
+                        anchor.href = `single-product.html?type=featured&index=0`;
+                        anchor.appendChild(img);
+                        cell.appendChild(anchor);
                     } else if (cellType === 'name') {
                         cell.innerText = product.name;
                     } else if (cellType === 'price') {
@@ -101,11 +104,21 @@ function renderCart() {
 
         // Event delegation for Remove button
         cartSection.addEventListener('click', function (event) {
-            if (event.target && event.target.nodeName === "BUTTON" && event.target.innerText === 'Remove') {
-                const rowIndex = Array.from(event.target.closest('tbody').rows).indexOf(event.target.closest('tr'));
+            if (
+                (event.target && event.target.nodeName === "BUTTON") ||
+                (event.target && event.target.nodeName === "I" && event.target.classList.contains("fas"))
+            ) {
+                let rowIndex;
+                if (event.target.nodeName === "I") {  // if the clicked element is the icon
+                    rowIndex = Array.from(event.target.closest('tbody').rows).indexOf(event.target.closest('tr'));
+                } else {  // if the clicked element is the button
+                    rowIndex = Array.from(event.target.closest('tbody').rows).indexOf(event.target.closest('tr'));
+                }
+
                 removeFromCart(rowIndex);
             }
         });
+
 
         // Create the cart totals section
         const cartAddSection = document.createElement('section');
@@ -118,7 +131,8 @@ function renderCart() {
 
         [['Cart Subtotal', totalPrice.toFixed(2), 'cart-subtotal'],
         ['Shipping', 'Free', null],
-        ['Total', `<strong>$${totalPrice.toFixed(2)}</strong>`, 'cart-total']].forEach(rowData => {
+        ['Total', `<strong>$${totalPrice.toFixed(2)}</strong>`, 'cart-total']
+        ].forEach(rowData => {
             const row = document.createElement('tr');
             rowData.forEach((cellData, index) => {
                 const cell = document.createElement('td');
@@ -127,7 +141,8 @@ function renderCart() {
                     if (rowData[2]) {
                         cell.id = rowData[2];
                     }
-                } else {
+                } else if (index !== 2) {
+                    // Prevent the ID from being displayed
                     cell.innerText = cellData;
                 }
                 row.appendChild(cell);
@@ -135,10 +150,17 @@ function renderCart() {
             totalTable.appendChild(row);
         });
 
+        // Create the Continue Shopping button
+        const continueShoppingBtn = document.createElement('button');
+        continueShoppingBtn.className = 'continue-shopping';  // Add a class for styling
+        continueShoppingBtn.innerText = 'Continue Shopping';
+        continueShoppingBtn.addEventListener('click', function () {
+            window.location.href = 'shop.html';  // Redirect to the shop page
+        });
 
         const checkoutBtn = document.createElement('button');
-        checkoutBtn.className = 'normal';
-        checkoutBtn.innerText = 'Proceed To Checkout';
+        checkoutBtn.className = 'checkout';
+        checkoutBtn.innerText = 'Checkout';
 
         subtotalDiv.appendChild(h6);
         subtotalDiv.appendChild(totalTable);
@@ -149,6 +171,7 @@ function renderCart() {
         mainElement.innerHTML = '';  // Clear existing content if any
         mainElement.appendChild(cartSection);
         mainElement.appendChild(cartAddSection);
+        mainElement.appendChild(continueShoppingBtn);// Append the Continue Shopping button to the main element
 
         // Update local storage and cart icon
         localStorage.setItem('cart', JSON.stringify(cart));
