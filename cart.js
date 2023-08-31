@@ -79,6 +79,7 @@ function renderCart() {
                     const cell = document.createElement('td');
                     if (cellType === 'button') {
                         const btn = document.createElement('button');
+                        btn.className = "remove-item";
                         btn.innerHTML = '<i class="fas fa-times-circle"></i>';
                         cell.appendChild(btn);
                     } else if (cellType === 'img') {
@@ -158,11 +159,11 @@ function renderCart() {
         cartAddSection.id = 'cart-add';
         const subtotalDiv = document.createElement('div');
         subtotalDiv.id = 'subtotal';
-        const h6 = document.createElement('h6');
-        h6.innerText = 'Cart Totals';
+        const cartTotals = document.createElement('h4');
+        cartTotals.innerText = 'Cart Totals';
         const totalTable = document.createElement('table');
 
-        [['Cart Subtotal', totalPrice.toFixed(2), 'cart-subtotal'],
+        [['Cart Subtotal', `$${totalPrice.toFixed(2)}`, 'cart-subtotal'],
         ['Shipping', 'Free', null],
         ['Total', `<strong>$${totalPrice.toFixed(2)}</strong>`, 'cart-total']
         ].forEach(rowData => {
@@ -195,7 +196,7 @@ function renderCart() {
         checkoutBtn.className = 'checkout';
         checkoutBtn.innerText = 'Checkout';
 
-        subtotalDiv.appendChild(h6);
+        subtotalDiv.appendChild(cartTotals);
         subtotalDiv.appendChild(totalTable);
         cartAddSection.appendChild(subtotalDiv);
         cartAddSection.appendChild(checkoutBtn);

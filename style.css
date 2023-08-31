@@ -460,6 +460,114 @@ p {
     cursor: pointer;
 }
 
+/* === View Cart Section === */
+
+/* Cart Container */
+#cart-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.625rem;
+    overflow-x: auto;
+}
+
+/* Table Headers */
+#cart-container th {
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.3rem;
+}
+
+/* Table Cells */
+#cart-container td {
+    text-align: center;
+    padding: 0.3rem;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* Individual Product Subtotal */
+.subtotal {
+    font-weight: bold;
+}
+
+/* Remove Button */
+.remove-item {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-item i.fas.fa-times-circle {
+    color: var(--secondary-color);
+    font-size: var(--base-font-size);
+    border: 0.125 var(--secondary-color);
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+/* Quantity Selector */
+.quantity {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Continue Shopping Button */
+.continue-shopping {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+/* Checkout Button */
+.checkout {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+/* Subtotal and Total */
+#subtotal,
+#cart-subtotal,
+#cart-total {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+#cart-subtotal,
+#cart-total {
+    font-size: 1rem;
+    font-weight: 500;
+    color: black;
+    background-color: var(--background-color);
+    border: 0.0625rem solid black;
+    padding: 0.3rem;
+}
+
+#cart-add tr td:nth-child(1) {
+    padding-right: 1rem;
+}
+
+
+/* Add margin to the top and bottom for all targeted elements */
+#cart-container,
+#subtotal,
+#cart-subtotal,
+#cart-total {
+    margin-top: 1.25rem;
+    /* Adjust as needed */
+    margin-bottom: 1.25rem;
+    /* Adjust as needed */
+}
+
+
 /* === Blog Section === */
 
 
