@@ -55,12 +55,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function getProductById(index, type) {
-            // Choose the right array based on 'type'
-            const productsData = type === 'featured' ? featuredProducts : newArrivals;
+            let productsData;  // Initialize variable to hold the correct product array
+
+            // New: Add condition for 'cart'
+            if (type === 'cart') {
+                try {
+                    // Attempt to load the cart from local storage
+                    productsData = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch (e) {
+                    // Log error if any and set productsData to empty array
+                    console.error("Error parsing cart from local storage:", e);
+                    productsData = [];
+                }
+            } else {
+                // This part remains unchanged
+                productsData = type === 'featured' ? featuredProducts : newArrivals;
+            }
+
+            // Return the product object based on index
             return productsData[index];
         }
 
-        displaySingleProduct();
+        displaySingleProduct();  // No change here, keep it as is
 
         // Load cart size from local storage and update the icon
         let cart;
@@ -70,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error parsing cart from local storage:", e);
             cart = [];
         }
+
 
         updateCartIconUtility(cart);
     } catch (err) {

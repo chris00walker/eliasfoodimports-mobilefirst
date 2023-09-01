@@ -88,7 +88,7 @@ function renderCart() {
                         img.alt = product.alt;
                         img.width = 50;
                         const anchor = document.createElement('a');
-                        anchor.href = `single-product.html?type=featured&index=0`;
+                        anchor.href = `single-product.html?type=cart&index=${index}`;
                         anchor.appendChild(img);
                         cell.appendChild(anchor);
                     } else if (cellType === 'name') {
