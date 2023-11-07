@@ -1,0 +1,1124 @@
+{
+    "e-Commerce Platform": {
+        "Entities": {
+            "UserAccount": {
+                "Attributes": [
+                    "UserID",
+                    "Username",
+                    "Password",
+                    "ContactInfo",
+                    "Preferences"
+                ]
+            },
+            "Cart": {
+                "Attributes": [
+                    "CartID",
+                    "UserID",
+                    "ProductList"
+                ]
+            },
+            "Search": {
+                "Attributes": [
+                    "SearchID",
+                    "UserID",
+                    "Query",
+                    "Filters",
+                    "SearchHistory",
+                    "SavedSearches"
+                ]
+            },
+            "PaymentGateway": {
+                "Attributes": [
+                    "GatewayID",
+                    "Name",
+                    "AuthenticationInfo",
+                    "PaymentMethods",
+                    "PaymentStatus",
+                    "PaymentDetails"
+                ]
+            },
+            "Product": {
+                "Attributes": [
+                    "ProductID",
+                    "Name",
+                    "Description",
+                    "Price",
+                    "Dimensions",
+                    "Weight",
+                    "CategoryID",
+                    "SupplierID",
+                    "ProductRating",
+                    "ProductReviews",
+                    "ProductImages"
+                ]
+            }
+        },
+        "Relationships": {
+            "UserAccount": [
+                "Cart",
+                "Search",
+                "PaymentGateway"
+            ]
+        },
+        "ValueObjects": {
+            "OrderTotal": [
+                "Subtotal",
+                "Taxes",
+                "Discounts",
+                "Total"
+            ],
+            "OrderStatus": [
+                "Status",
+                "Timestamp"
+            ]
+        },
+        "Aggregates": {
+            "Order": [
+                "Cart",
+                "PaymentInformation",
+                "ShippingAddress",
+                "OrderStatus",
+                "OrderTotal"
+            ]
+        },
+        "BoundedContext": "Online Shopping Experience",
+        "Interactions": {
+            "FetchProductDetails": [
+                "Product Catalog Management"
+            ],
+            "InitiateTrackOrders": [
+                "Order Processing and Fulfillment"
+            ],
+            "RouteCustomerInquiries": [
+                "Customer Relationship Management"
+            ],
+            "ProcessTransactions": [
+                "Financial Governance"
+            ]
+        },
+        "DomainEvents": {
+            "OrderPlaced": [
+                "OrderID",
+                "UserID",
+                "OrderDetails",
+                "PaymentDetails",
+                "Timestamp"
+            ],
+            "UserAccountCreated": [
+                "UserID",
+                "UserDetail",
+                "Timestamp"
+            ],
+            "PaymentProcessed": [
+                "PaymentID",
+                "UserID",
+                "OrderID",
+                "PaymentStatus",
+                "PaymentAmount",
+                "PaymentMethod",
+                "Timestamp"
+            ],
+            "CartUpdated": [
+                "CartID",
+                "UserID",
+                "ProductID",
+                "Quantity",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "OrderRepository": [
+                "findOrderById",
+                "saveOrder",
+                "removeOrder"
+            ],
+            "UserAccountRepository": [
+                "findUserById",
+                "saveUser",
+                "removeUser"
+            ],
+            "CartRepository": [
+                "findCartByUserId",
+                "saveCart",
+                "removeCart"
+            ]
+        },
+        "DomainServices": {
+            "PricingService": [
+                "calculateOrderTotal",
+                "applyDiscounts"
+            ],
+            "PaymentProcessingService": [
+                "processPayment",
+                "refundPayment"
+            ]
+        },
+        "Policies": {
+            "DiscountPolicy": [
+                "isDiscountApplicable",
+                "calculateDiscountAmount"
+            ]
+        },
+        "Factories": {
+            "OrderFactory": [
+                "createOrder"
+            ],
+            "UserAccountFactory": [
+                "createUserAccount"
+            ]
+        }
+    },
+    "Product Management": {
+        "Entities": {
+            "Product": {
+                "Attributes": [
+                    "ProductID",
+                    "Name",
+                    "Description",
+                    "Price",
+                    "Dimensions",
+                    "Weight",
+                    "CategoryID",
+                    "SupplierID",
+                    "ProductRating",
+                    "ProductReviews",
+                    "ProductImages",
+                    "InventoryLevel"
+                ]
+            },
+            "Category": {
+                "Attributes": [
+                    "CategoryID",
+                    "Name",
+                    "ParentCategoryID"
+                ]
+            },
+            "ProductSupplier": {
+                "Attributes": [
+                    "ProductSupplierID",
+                    "Name",
+                    "Address",
+                    "ContactInfo",
+                    "SupplierRating",
+                    "ContractTerms",
+                    "PerformanceHistory"
+                ]
+            },
+            "Inventory": {
+                "Attributes": [
+                    "ProductID",
+                    "QuantityAvailable"
+                ]
+            },
+            "ProductVariant": {
+                "Attributes": [
+                    "VariantID",
+                    "ProductID",
+                    "VariantDescription",
+                    "VariantPrice",
+                    "VariantDimensions",
+                    "VariantWeight",
+                    "VariantImages"
+                ]
+            }
+        },
+        "Relationships": {
+            "Product": [
+                "Category",
+                "ProductSupplier",
+                "Inventory",
+                "ProductVariant"
+            ]
+        },
+        "ValueObjects": {
+            "Dimensions": [
+                "Length",
+                "Width",
+                "Height"
+            ],
+            "Weight": [
+                "Value",
+                "Unit"
+            ]
+        },
+        "Aggregates": {
+            "Product": [
+                "Category",
+                "ProductSupplier",
+                "Inventory",
+                "ProductVariant"
+            ]
+        },
+        "BoundedContext": "Product Catalog Management",
+        "Interactions": {
+            "ProvideProductDetails": [
+                "Online Shopping Experience"
+            ],
+            "RequestInventoryUpdates": [
+                "Supply and Logistics"
+            ],
+            "ProvidePromoInfo": [
+                "Market Engagement"
+            ]
+        },
+        "DomainEvents": {
+            "ProductAdded": [
+                "ProductID",
+                "ProductDetail",
+                "Timestamp"
+            ],
+            "ProductUpdated": [
+                "ProductID",
+                "UpdatedProductDetail",
+                "Timestamp"
+            ],
+            "InventoryUpdated": [
+                "ProductID",
+                "OldInventoryLevel",
+                "NewInventoryLevel",
+                "Timestamp"
+            ],
+            "ProductDeleted": [
+                "ProductID",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "ProductRepository": [
+                "findProductById",
+                "saveProduct",
+                "removeProduct",
+                "findInventoryLevelByProductId"
+            ],
+            "CategoryRepository": [
+                "findCategoryById",
+                "saveCategory",
+                "removeCategory"
+            ],
+            "SupplierRepository": [
+                "findSupplierById",
+                "saveSupplier",
+                "removeSupplier"
+            ]
+        },
+        "DomainServices": {
+            "InventoryService": [
+                "updateInventory",
+                "checkInventoryLevel"
+            ],
+            "ProductListingService": [
+                "listProductsByCategory",
+                "searchProducts"
+            ]
+        },
+        "Policies": {
+            "PricingPolicy": [
+                "setPricing",
+                "updatePricing"
+            ],
+            "StockReplenishmentPolicy": [
+                "checkReplenishmentThreshold",
+                "requestReplenishment"
+            ]
+        },
+        "Factories": {
+            "ProductFactory": [
+                "createProduct"
+            ],
+            "CategoryFactory": [
+                "createCategory"
+            ]
+        }
+    },
+    "Sales and Marketing": {
+        "Entities": {
+            "Order": {
+                "Attributes": [
+                    "OrderID",
+                    "CustomerID",
+                    "OrderDate",
+                    "TotalAmount",
+                    "OrderStatus"
+                ]
+            },
+            "DiscountPromotion": {
+                "Attributes": [
+                    "PromotionID",
+                    "PromotionType",
+                    "PromotionCode",
+                    "DiscountAmount",
+                    "StartDate",
+                    "EndDate"
+                ]
+            },
+            "Campaign": {
+                "Attributes": [
+                    "CampaignID",
+                    "Name",
+                    "StartDate",
+                    "EndDate",
+                    "TargetAudience",
+                    "MarketingChannel"
+                ]
+            },
+            "Customer": {
+                "Attributes": [
+                    "CustomerID",
+                    "Name",
+                    "Email",
+                    "Address",
+                    "Preferences"
+                ]
+            },
+            "MarketingChannel": {
+                "Attributes": [
+                    "ChannelID",
+                    "ChannelName",
+                    "ChannelType",
+                    "ChannelPerformanceMetrics"
+                ]
+            }
+        },
+        "Relationships": {
+            "Customer": [
+                "Order"
+            ],
+            "Campaign": [
+                "Customer",
+                "MarketingChannel"
+            ]
+        },
+        "ValueObjects": {
+            "CampaignMetrics": [
+                "Views",
+                "Clicks",
+                "Conversions",
+                "EngagementRate",
+                "ReturnOnAdSpend"
+            ]
+        },
+        "Aggregates": {
+            "Order": [
+                "Customer"
+            ]
+        },
+        "BoundedContext": "Market Engagement",
+        "Interactions": {
+            "PromoteProducts": [
+                "Online Shopping Experience"
+            ],
+            "AnalyzeCustomerFeedback": [
+                "Customer Relationship Management"
+            ],
+            "CoordinateProductPromotion": [
+                "Product Catalog Management"
+            ]
+        },
+        "DomainEvents": {
+            "CampaignLaunched": [
+                "CampaignID",
+                "CampaignDetails",
+                "Timestamp"
+            ],
+            "CampaignEnded": [
+                "CampaignID",
+                "CampaignPerformanceMetrics",
+                "Timestamp"
+            ],
+            "CustomerFeedbackReceived": [
+                "FeedbackID",
+                "CustomerID",
+                "FeedbackType",
+                "FeedbackDetails",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "CampaignRepository": [
+                "findCampaignById",
+                "saveCampaign",
+                "removeCampaign"
+            ],
+            "CustomerRepository": [
+                "findCustomerById",
+                "saveCustomer",
+                "removeCustomer"
+            ],
+            "MarketingChannelRepository": [
+                "findChannelById",
+                "saveChannel",
+                "removeChannel"
+            ]
+        },
+        "DomainServices": {
+            "CampaignManagementService": [
+                "launchCampaign",
+                "endCampaign",
+                "analyzeCampaignPerformance"
+            ],
+            "CustomerEngagementService": [
+                "segmentCustomers",
+                "sendPromotions"
+            ]
+        },
+        "Policies": {
+            "DiscountPolicy": [
+                "applyDiscount",
+                "validateDiscount"
+            ],
+            "CustomerSegmentationPolicy": [
+                "segmentCustomers"
+            ]
+        },
+        "Factories": {
+            "CampaignFactory": [
+                "createCampaign"
+            ],
+            "CustomerFactory": [
+                "createCustomer"
+            ]
+        }
+    },
+    "Supply Chain Management": {
+        "Entities": {
+            "LogisticsSupplier": {
+                "Attributes": [
+                    "LogisticsSupplierID",
+                    "Name",
+                    "Address",
+                    "ContactInfo",
+                    "SupplierRating",
+                    "ContractTerms",
+                    "PerformanceHistory"
+                ]
+            },
+            "PurchaseOrder": {
+                "Attributes": [
+                    "POID",
+                    "SupplierID",
+                    "OrderDate",
+                    "DeliveryDate",
+                    "Status"
+                ]
+            },
+            "Shipment": {
+                "Attributes": [
+                    "ShipmentID",
+                    "POID",
+                    "ShipDate",
+                    "ArrivalDate",
+                    "TrackingNumber"
+                ]
+            },
+            "Delivery": {
+                "Attributes": [
+                    "DeliveryID",
+                    "OrderID",
+                    "ShipDate",
+                    "ArrivalDate",
+                    "TrackingNumber",
+                    "DeliverySchedule"
+                ]
+            },
+            "Logistics": {
+                "Attributes": [
+                    "LogisticsID",
+                    "LogisticsProvider",
+                    "TrackingNumber",
+                    "StatusUpdates"
+                ]
+            }
+        },
+        "Relationships": {
+            "LogisticsSupplier": [
+                "PurchaseOrder"
+            ],
+            "PurchaseOrder": [
+                "Shipment"
+            ],
+            "Shipment": [
+                "Delivery"
+            ]
+        },
+        "ValueObjects": {
+            "DeliverySchedule": [
+                "DeliveryDate",
+                "TimeWindow"
+            ]
+        },
+        "Aggregates": {
+            "PurchaseOrder": [
+                "LogisticsSupplier",
+                "Shipment"
+            ]
+        },
+        "BoundedContext": "Supply and Logistics",
+        "Interactions": {
+            "ProvideInventoryUpdates": [
+                "Product Catalog Management"
+            ],
+            "CoordinateDeliverySchedules": [
+                "Order Processing and Fulfillment"
+            ],
+            "CostAnalysisInteraction": [
+                "Financial Governance"
+            ]
+        },
+        "DomainEvents": {
+            "PurchaseOrderPlaced": [
+                "PurchaseOrderID",
+                "SupplierID",
+                "OrderDetails",
+                "Timestamp"
+            ],
+            "ShipmentReceived": [
+                "ShipmentID",
+                "PurchaseOrderID",
+                "ExpectedItems",
+                "ReceivedItems",
+                "Timestamp"
+            ],
+            "DeliveryScheduled": [
+                "DeliveryID",
+                "OrderID",
+                "ScheduledDateTime",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "LogisticsSupplierRepository": [
+                "findLogisticsSupplierById",
+                "saveLogisticsSupplier",
+                "removeLogisticsSupplier"
+            ],
+            "PurchaseOrderRepository": [
+                "findPurchaseOrderById",
+                "savePurchaseOrder",
+                "removePurchaseOrder"
+            ],
+            "ShipmentRepository": [
+                "findShipmentById",
+                "saveShipment",
+                "removeShipment"
+            ],
+            "DeliveryRepository": [
+                "findDeliveryById",
+                "saveDelivery",
+                "removeDelivery"
+            ]
+        },
+        "DomainServices": {
+            "InventoryManagementService": [
+                "checkInventoryLevels",
+                "requestReplenishment",
+                "updateInventory"
+            ],
+            "OrderFulfillmentService": [
+                "scheduleDelivery",
+                "trackShipment",
+                "confirmDelivery"
+            ]
+        },
+        "Policies": {
+            "ReplenishmentPolicy": [
+                "determineReplenishmentNeed",
+                "calculateReplenishmentQuantity"
+            ],
+            "DeliveryPolicy": [
+                "validateDeliverySchedule",
+                "calculateDeliveryWindow"
+            ]
+        },
+        "Factories": {
+            "SupplierFactory": [
+                "createSupplier"
+            ],
+            "PurchaseOrderFactory": [
+                "createPurchaseOrder"
+            ]
+        }
+    },
+    "Customer Service": {
+        "Entities": {
+            "SupportTicket": {
+                "Attributes": [
+                    "TicketID",
+                    "CustomerID",
+                    "IssueDescription",
+                    "Status",
+                    "ResolutionTime"
+                ]
+            },
+            "Feedback": {
+                "Attributes": [
+                    "FeedbackID",
+                    "CustomerID",
+                    "Rating",
+                    "Comments"
+                ]
+            },
+            "CustomerProfile": {
+                "Attributes": [
+                    "CustomerID",
+                    "Name",
+                    "ContactInfo",
+                    "OrderHistory"
+                ]
+            },
+            "CorporateAccount": {
+                "Attributes": [
+                    "AccountID",
+                    "BusinessName",
+                    "ContactInfo",
+                    "OrderHistory"
+                ]
+            }
+        },
+        "Relationships": {
+            "CustomerProfile": [
+                "SupportTicket",
+                "Feedback"
+            ],
+            "CorporateAccount": [
+                "SupportTicket",
+                "Feedback"
+            ]
+        },
+        "ValueObjects": {
+            "TicketStatus": [
+                "Status",
+                "Timestamp"
+            ]
+        },
+        "Aggregates": {
+            "SupportTicket": [
+                "CustomerProfile",
+                "Feedback"
+            ]
+        },
+        "BoundedContext": "Customer Relationship Management",
+        "Interactions": {
+            "AddressInquiries": [
+                "Online Shopping Experience"
+            ],
+            "ShareInsights": [
+                "Market Engagement"
+            ],
+            "CoordinateIssueResolution": [
+                "Order Processing and Fulfillment"
+            ]
+        },
+        "DomainEvents": {
+            "SupportTicketCreated": [
+                "TicketID",
+                "CustomerID",
+                "IssueDetails",
+                "Timestamp"
+            ],
+            "SupportTicketResolved": [
+                "TicketID",
+                "ResolutionDetails",
+                "Timestamp"
+            ],
+            "CorporateAccountCreated": [
+                "CorporateAccountID",
+                "BusinessDetails",
+                "Timestamp"
+            ],
+            "FeedbackResponded": [
+                "FeedbackID",
+                "CustomerID",
+                "ResponseDetails",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "CorporateAccountRepository": [
+                "findCorporateAccountById",
+                "saveCorporateAccount",
+                "removeCorporateAccount"
+            ],
+            "SupportTicketRepository": [
+                "findTicketById",
+                "saveTicket",
+                "removeTicket",
+                "findTicketsByCustomerId"
+            ],
+            "FeedbackRepository": [
+                "findFeedbackById",
+                "saveFeedback",
+                "removeFeedback",
+                "findFeedbackByCustomerId"
+            ]
+        },
+        "DomainServices": {
+            "CustomerSupportService": [
+                "createSupportTicket",
+                "resolveSupportTicket",
+                "provideFeedback"
+            ]
+        },
+        "Policies": {
+            "ResponseTimePolicy": [
+                "calculateResponseDeadline"
+            ],
+            "FeedbackEvaluationPolicy": [
+                "evaluateFeedback"
+            ]
+        },
+        "Factories": {
+            "SupportTicketFactory": [
+                "createNewTicket"
+            ],
+            "FeedbackFactory": [
+                "createNewFeedback"
+            ]
+        }
+    },
+    "Finance and Compliance": {
+        "Entities": {
+            "Invoice": {
+                "Attributes": [
+                    "InvoiceID",
+                    "OrderID",
+                    "InvoiceDate",
+                    "DueDate",
+                    "AmountDue",
+                    "HistoricalPricing"
+                ]
+            },
+            "BillingCycle": {
+                "Attributes": [
+                    "CycleID",
+                    "StartDate",
+                    "EndDate",
+                    "InvoiceID"
+                ]
+            },
+            "TaxCompliance": {
+                "Attributes": [
+                    "TaxID",
+                    "TaxRate",
+                    "TaxCategory",
+                    "TaxJurisdiction",
+                    "TaxExemptions"
+                ]
+            },
+            "FinancialReporting": {
+                "Attributes": [
+                    "ReportID",
+                    "Period",
+                    "FinancialData",
+                    "AuditTrail"
+                ]
+            },
+            "Subscription": {
+                "Attributes": [
+                    "SubscriptionID",
+                    "CustomerID",
+                    "SubscriptionType",
+                    "BillingCycleID",
+                    "SubscriptionStatus"
+                ]
+            }
+        },
+        "Relationships": {
+            "Invoice": [
+                "Order",
+                "BillingCycle",
+                "TaxCompliance",
+                "FinancialReporting",
+                "Subscription"
+            ]
+        },
+        "ValueObjects": {
+            "InvoiceAmount": [
+                "Subtotal",
+                "Taxes",
+                "Total"
+            ]
+        },
+        "Aggregates": {
+            "Invoice": [
+                "BillingCycle",
+                "TaxCompliance",
+                "FinancialReporting",
+                "Subscription"
+            ]
+        },
+        "BoundedContext": "Financial Governance",
+        "Interactions": {
+            "ProcessTransactions": [
+                "Online Shopping Experience"
+            ],
+            "EnsureCompliance": [
+                "Order Processing and Fulfillment",
+                "Supply and Logistics"
+            ],
+            "ResolveBillingIssues": [
+                "Customer Relationship Management"
+            ]
+        },
+        "DomainEvents": {
+            "InvoiceGenerated": [
+                "InvoiceID",
+                "OrderID",
+                "InvoiceDetails",
+                "Timestamp"
+            ],
+            "PaymentReceived": [
+                "PaymentID",
+                "InvoiceID",
+                "PaymentAmount",
+                "PaymentMethod",
+                "PaymentDetails",
+                "Timestamp"
+            ],
+            "FinancialReportGenerated": [
+                "ReportID",
+                "ReportDetails",
+                "Timestamp"
+            ],
+            "TaxComplianceChecked": [
+                "CheckID",
+                "ComplianceStatus",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "InvoiceRepository": [
+                "findInvoiceById",
+                "saveInvoice",
+                "removeInvoice",
+                "findInvoicesByCustomerId"
+            ],
+            "PaymentRepository": [
+                "findPaymentById",
+                "savePayment",
+                "removePayment",
+                "findPaymentsByCustomerId"
+            ],
+            "FinancialReportRepository": [
+                "findReportById",
+                "saveReport",
+                "removeReport",
+                "findReportsByPeriod"
+            ]
+        },
+        "DomainServices": {
+            "InvoiceService": [
+                "generateInvoice",
+                "calculateInvoiceTotal"
+            ],
+            "PaymentProcessingService": [
+                "processPayment",
+                "refundPayment"
+            ],
+            "FinancialReportingService": [
+                "generateFinancialReport"
+            ],
+            "TaxComplianceService": [
+                "checkTaxCompliance"
+            ]
+        },
+        "Policies": {
+            "TaxPolicy": [
+                "calculateTax"
+            ],
+            "DiscountPolicy": [
+                "applyDiscount"
+            ]
+        },
+        "Factories": {
+            "InvoiceFactory": [
+                "createNewInvoice"
+            ],
+            "PaymentFactory": [
+                "createNewPayment"
+            ],
+            "FinancialReportFactory": [
+                "createNewFinancialReport"
+            ]
+        }
+    },
+    "Operations": {
+        "Entities": {
+            "OrderProcessing": {
+                "Attributes": [
+                    "ProcessingID",
+                    "OrderID",
+                    "Status",
+                    "FulfillmentCenterID",
+                    "ErrorHandling"
+                ]
+            },
+            "FulfillmentCenter": {
+                "Attributes": [
+                    "CenterID",
+                    "Name",
+                    "Address",
+                    "Inventory"
+                ]
+            },
+            "InventoryReplenishment": {
+                "Attributes": [
+                    "ReplenishmentID",
+                    "ProductID",
+                    "Quantity",
+                    "Status",
+                    "ReplenishmentThreshold",
+                    "LeadTime"
+                ]
+            },
+            "ReturnManagement": {
+                "Attributes": [
+                    "ReturnID",
+                    "OrderID",
+                    "ReturnDate",
+                    "Status"
+                ]
+            },
+            "ShippingProvider": {
+                "Attributes": [
+                    "ProviderID",
+                    "Name",
+                    "ContactInfo",
+                    "ShippingRates"
+                ]
+            }
+        },
+        "Relationships": {
+            "OrderProcessing": [
+                "FulfillmentCenter",
+                "InventoryReplenishment",
+                "ReturnManagement",
+                "ShippingProvider"
+            ]
+        },
+        "ValueObjects": {
+            "FulfillmentStatus": [
+                "Status",
+                "Timestamp"
+            ],
+            "DeliveryTracking": [
+                "TrackingNumber",
+                "StatusUpdates"
+            ]
+        },
+        "Aggregates": {
+            "Fulfillment": [
+                "OrderProcessing",
+                "InventoryReplenishment",
+                "ReturnManagement",
+                "ShippingProvider"
+            ]
+        },
+        "BoundedContext": "Order Processing and Fulfillment",
+        "Interactions": {
+            "ProcessOrders": [
+                "Online Shopping Experience",
+                "Supply and Logistics",
+                "Order Processing and Fulfillment"
+            ],
+            "HandleFulfillment": [
+                "Financial Governance",
+                "Customer Relationship Management"
+            ]
+        },
+        "DomainEvents": {
+            "OrderProcessingInitiated": [
+                "ProcessingID",
+                "OrderID",
+                "Timestamp"
+            ],
+            "InventoryReplenished": [
+                "ReplenishmentID",
+                "ProductID",
+                "OldInventoryLevel",
+                "NewInventoryLevel",
+                "Timestamp"
+            ],
+            "ReturnProcessed": [
+                "ReturnID",
+                "OrderID",
+                "ReturnStatus",
+                "ReturnDetails",
+                "Timestamp"
+            ],
+            "FulfillmentCompleted": [
+                "FulfillmentID",
+                "OrderID",
+                "FulfillmentDetails",
+                "Timestamp"
+            ]
+        },
+        "Repositories": {
+            "OrderProcessingRepository": [
+                "findProcessingById",
+                "saveProcessing",
+                "removeProcessing",
+                "findProcessingsByOrderId"
+            ],
+            "InventoryReplenishmentRepository": [
+                "findReplenishmentById",
+                "saveReplenishment",
+                "removeReplenishment",
+                "findReplenishmentsByProductId"
+            ],
+            "ReturnRepository": [
+                "findReturnById",
+                "saveReturn",
+                "removeReturn",
+                "findReturnsByOrderId"
+            ],
+            "FulfillmentRepository": [
+                "findFulfillmentById",
+                "saveFulfillment",
+                "removeFulfillment",
+                "findFulfillmentsByOrderId"
+            ]
+        },
+        "DomainServices": {
+            "OrderProcessingService": [
+                "initiateOrderProcessing",
+                "completeOrderProcessing"
+            ],
+            "InventoryManagementService": [
+                "replenishInventory",
+                "updateInventoryLevel"
+            ],
+            "ReturnProcessingService": [
+                "processReturn",
+                "updateReturnStatus"
+            ],
+            "FulfillmentService": [
+                "initiateFulfillment",
+                "completeFulfillment"
+            ]
+        },
+        "Policies": {
+            "InventoryPolicy": [
+                "determineReplenishmentThreshold",
+                "calculateReplenishmentQuantity"
+            ],
+            "ReturnPolicy": [
+                "validateReturn",
+                "determineReturnEligibility"
+            ]
+        },
+        "Factories": {
+            "OrderProcessingFactory": [
+                "createNewOrderProcessing"
+            ],
+            "InventoryReplenishmentFactory": [
+                "createNewInventoryReplenishment"
+            ],
+            "ReturnFactory": [
+                "createNewReturn"
+            ],
+            "FulfillmentFactory": [
+                "createNewFulfillment"
+            ]
+        }
+    }
+}
